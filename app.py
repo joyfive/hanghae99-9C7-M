@@ -7,7 +7,7 @@ import certifi
 
 ca = certifi.where()
 
-client = MongoClient('mongodb+srv://DaminAn:ekals3939@cluster0.hd1bg.mongodb.net/?retryWrites=true&w=majority',
+client = MongoClient('mongodb+srv://DaminAn:ekals3939@cluster0.hd1bg.mongodb.net/Cluster0?retryWrites=true&w=majority',
                      tlsCAFile=ca)
 db = client.dbsparta
 
@@ -31,21 +31,25 @@ def signup():
 def view():
     return render_template('view.html')
 
+@app.route('/write')
+def write():
+    return render_template('write.html')
 
 @app.route("/content", methods=["POST"])
 def content():
     title_receive = request.form["title_give"]
-    comment_receive = request.form["comment_give"]
+    content_receive = request.form["content_give"]
     star_receive = request.form["star_give"]
 
     doc = {
         "title": title_receive,
-        "comment": comment_receive,
+        "content": content_receive,
         "star": star_receive
     }
 
     db.musics.insert_one(doc)
     return jsonify({"result": "success", "msg": "업로드 완료!"})
+
 
 
 if __name__ == '__main__':
