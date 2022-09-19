@@ -99,11 +99,20 @@
             margin: auto;
         }
 
+        .wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
         #star {
             background-color: gray;
             max-width: 700px;
             max-height: 100px;
             margin: 10px auto 15px auto;
+        }
+
+        #like {
+            margin-right: 30px;
         }
 
     </style>
@@ -140,9 +149,17 @@
     </div>
 
 
-   <div id="star">
-       ⭐⭐⭐
-   </div>
+    <div class="wrapper">
+        <div id="star">
+            별점 : ⭐⭐⭐
+        </div>
+
+        <div id="like">
+            3❤️
+        </div>
+    </div>
+
+
 
     <button>홈으로</button>
 
