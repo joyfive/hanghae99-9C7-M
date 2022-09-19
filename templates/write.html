@@ -93,6 +93,27 @@
         }
 
     </style>
+
+    <script>
+        function uploadPost() {
+            let title = $("#title").val();
+            let content = $("#content").val();
+            let star = $("#star").val();
+
+
+            $.ajax({
+                type: "POST",
+                url: "/content",
+                data: {title_give: title, content_give: content, star_give: star},
+                success: function (response) {
+                    console.log(response)
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+
 </head>
 <body>
 <div class="mytitle">
@@ -122,11 +143,11 @@
 
 <div class="mypost">
     <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" class="form-control" id="title" placeholder="name@example.com">
         <label for="floatingInput">글 제목</label>
     </div>
     <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+            <textarea class="form-control" placeholder="Leave a comment here" id="content"
                       style="height: 400px"></textarea>
         <label for="floatingTextarea2">내용</label>
     </div>
@@ -143,7 +164,7 @@
         </select>
     </div>
 
-    <button>게시물 등록하기</button>
+    <button onclick="uploadPost()">게시물 등록하기</button>
 
 </div>
 
