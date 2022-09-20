@@ -31,17 +31,25 @@ def signup():
 def view():
     return render_template('view.html')
 
+@app.route('/viewer', methods=["GET"])
+def viewer():
+    # content_view = db.musics.find_one()
+    return render_template('view.html')
+
 @app.route('/write')
 def write():
     return render_template('write.html')
 
 @app.route("/content", methods=["POST"])
 def content():
+    content_list = list(db.musics.find({}, {'_id': False}))
+    count = len(content_list) + 1
     title_receive = request.form["title_give"]
     content_receive = request.form["content_give"]
     star_receive = request.form["star_give"]
 
     doc = {
+        "num" : count,
         "title": title_receive,
         "content": content_receive,
         "star": star_receive
