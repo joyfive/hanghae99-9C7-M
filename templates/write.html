@@ -126,17 +126,15 @@
         }
 
         function uploadPost() {
+            var album = document.getElementById('album_url').value
             let title = $("#title").val();
             let content = $("#content").val();
             let star = $("#star").val();
-
-
             $.ajax({
                 type: "POST",
                 url: "/content",
-                data: {title_give: title, content_give: content, star_give: star},
+                data: {title_give: title, content_give: content, star_give: star, album_give: album},
                 success: function (response) {
-                    console.log(response)
                     alert(response['msg']);
                     window.location.reload();
                 }

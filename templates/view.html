@@ -134,8 +134,10 @@
                 data: {num},
                 success: function (response) {
                     rows = response["content_list"]
-                    console.log(rows)
                     for (let i = 0; i < rows.length; i++){
+                        let artist = rows[i]["artist"]
+                        let img = rows[i]["img"]
+                        let s_title = rows[i]["s_title"]
                         let content = rows[i]["content"]
                         let title = rows[i]["title"]
                         let star = rows[i]["star"]
@@ -143,7 +145,14 @@
 
                         let star_image = '⭐'.repeat(star)
 
-                        let temp_html = `    <div id="title">${title}</div>
+                        let temp_html = `   <div id="album-art"><img src="http://image.genie.co.kr${img}" alt="${title}"></div>
+                                                <div id="description">
+                                                    <ul>
+                                                        <li>${s_title}</li>
+                                                        <li>${artist}</li>
+                                                    </ul>
+                                                </div>
+                                           <div id="title">${title}</div>
 
                                             <div id="content">${content}</div>
                                             <div class="wrapper">
@@ -165,16 +174,16 @@
 </div>
 
 <div class="mymusic">
-    <div class="wrap">
-   <div id="album-art">앨범아트</div>
-    <div id="description">
-        <ul>
-            <li>앨범명(곡명)</li>
-            <li>가수</li>
-            <li>(앨범명)</li>
-        </ul>
-    </div>
-</div>
+<!--    <div class="wrap">-->
+<!--        <div id="album-art">앨범아트</div>-->
+<!--        <div id="description">-->
+<!--            <ul>-->
+<!--                <li>앨범명(곡명)</li>-->
+<!--                <li>가수</li>-->
+<!--                <li>(앨범명)</li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </div>
 
