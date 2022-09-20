@@ -100,6 +100,31 @@
     </style>
 
     <script>
+          function get_url() {
+            var album = document.getElementById('album_url').value
+              $('#show-box').empty()
+            $.ajax({
+                type: "POST",
+                url: "/album",
+                data: {album_give: album},
+                success: function (response) {
+                    let item = response['item']
+                    let title = item['title']
+                    let artist = item['artist']
+                    let img = item['img']
+                    let temp_html = `<div id="album-art"><img src="http://image.genie.co.kr${img}" alt="${title}"></div>
+                                        <div id="description">
+                                            <ul>
+                                                <li>${title}</li>
+                                                <li>${artist}</li>
+                                            </ul>
+                                        </div>`
+                    $('#show-box').append(temp_html)
+
+                }
+            });
+        }
+
         function uploadPost() {
             let title = $("#title").val();
             let content = $("#content").val();
@@ -118,32 +143,6 @@
             });
         }
 
-          function get_url() {
-            var album = document.getElementById('album_url').value
-              $('#show-box').empty()
-            $.ajax({
-                type: "POST",
-                url: "/album",
-                data: {album_give: album},
-                success: function (response) {
-                    let item = response['item']
-                    console.log(item)
-                    let title = item['title']
-                    let artist = item['artist']
-                    let img = item['img']
-                    console.log(title,artist,img)
-                    let temp_html = `<div id="album-art"><img src="http://image.genie.co.kr${img}" alt="${title}"></div>
-                                        <div id="description">
-                                            <ul>
-                                                <li>${title}</li>
-                                                <li>${artist}</li>
-                                            </ul>
-                                        </div>`
-                    $('#show-box').append(temp_html)
-
-                }
-            });
-        }
     </script>
 
 </head>
