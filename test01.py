@@ -27,6 +27,7 @@ def home():
 @app.route("/album", methods=["POST"])
 def album_input():
     album_receive = request.form["album_give"]
+
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     params = {'axnm': album_receive}
@@ -36,15 +37,17 @@ def album_input():
     s_img = soup.select_one('div.album-detail-infos > div.photo-zone > a > span.cover')
     s_tit = soup.select_one('#body-content > div.album-detail-infos > div.info-zone > h2')
 
-    img = s_img.find('img')['src'][2:-19],
+    img = s_img.find('img')['src'][19:-19],
     title = s_tit.text.strip(),
     artist = s_artist.text
 
-    return jsonify({
+    item = {
         'img': img,
         'title': title,
         'artist': artist
-    })
+    }
+    return jsonify({'item': item})
+
 # @app.route("/album", methods=["GET"])
 # def album_preview():
 
