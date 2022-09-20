@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+from bs4 import BeautifulSoup
+import requests
 
 app = Flask(__name__)
 
@@ -14,7 +16,7 @@ db = client.dbsparta
 
 @app.route('/')
 def main():
-    return render_template('main.html')
+    return render_template('index.html')
 
 
 @app.route('/signin')
@@ -27,14 +29,43 @@ def signup():
     return render_template('signup.html')
 
 
-@app.route('/view')
-def view():
-    return render_template('view.html')
+@app.route("/album", methods=["POST"])
+def album_input():
+    album_receive = request.form["album_give"]
 
-@app.route('/viewer', methods=["GET"])
-def viewer():
-    # content_view = db.musics.find_one()
-    return render_template('view.html')
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    params = {'axnm': album_receive}
+    res = requests.get('https://www.genie.co.kr/detail/albumInfo', headers=headers, params=params)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    s_artist = soup.select_one('div.info-zone > ul > li:nth-child(1) > span.value > a')
+    s_img = soup.select_one('div.album-detail-infos > div.photo-zone > a > span.cover')
+    s_tit = soup.select_one('#body-content > div.album-detail-infos > div.info-zone > h2')
+
+    img = s_img.find('img')['src'][19:-19],
+    title = s_tit.text.strip(),
+    artist = s_artist.text
+
+    item = {
+        'img': img,
+        'title': title,
+        'artist': artist
+    }
+    return jsonify({'item': item})
+
+
+
+@app.route('/view/<num>')
+def view(num):
+    return render_template('view.html', num=num)
+
+@app.route('/view_content/', methods=['GET'])
+def view_content():
+    num = request.args.get('num')
+    int_num = int(num)
+    content_view = [db.musics.find_one({'num': int_num}, {'_id': False})]
+    return jsonify({'content_list': content_view})
+
 
 @app.route('/write')
 def write():
