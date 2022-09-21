@@ -1,2 +1,5 @@
 # created by virtualenv automatically
+__pycache__
+.DS_Store
+venv
 secretkey.py
