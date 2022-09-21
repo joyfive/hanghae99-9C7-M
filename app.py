@@ -14,25 +14,26 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.0pziqjw.mongodb.net/Clu
 
 db = client.dbsparta_mini
 
-
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
-        return render_template('index.html', user_info=user_info)  #로그인하고 넘어갈 페이지
+        return render_template('main.html', user_info=user_info)  #로그인하면 넘어갈 페이지
     except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다.")) #메인페이지로 바꿔야함
+        return redirect(url_for("main", msg="로그인 시간이 만료되었습니다.")) #로그인 시간 끝나면 나오는 페이지랑 메세지
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다.")) #메인페이지로 바꿔야함
+        return redirect(url_for("main", msg="로그인 정보가 존재하지 않습니다.")) #로그인이 안된상태랑 메세지
 
+@app.route('/main')
+def main():
+    return render_template('main.html')
 
-@app.route('/login')
-def login():
+@app.route('/sign')
+def sign():
     msg = request.args.get("msg")
-    return render_template('login.html', msg=msg) #html 이름 바꿔야함 url도 바꿔도 댐
-
+    return render_template('sign.html', msg=msg)
 
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
@@ -47,8 +48,8 @@ def sign_in():
         payload = {
             'id': username_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
-        }                                                          # ↓ (localhost 하면 주석)(flask하면 주석 지우기)
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')#.decode('utf-8')
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')#.decode('utf-8') #(localhost 하면 주석)(flask하면 주석 지우기)
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
@@ -64,7 +65,7 @@ def sign_up():
 
     doc = {
         "username": username_receive,
-         "password": password_hash,
+        "password": password_hash
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
@@ -76,7 +77,6 @@ def check_dup():
     exists = bool(db.users.find_one({"username": username_receive}))
     # print(value_receive, type_receive, exists)
     return jsonify({'result': 'success', 'exists': exists})
-
 
 
 if __name__ == '__main__':
