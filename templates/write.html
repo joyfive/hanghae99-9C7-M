@@ -1,10 +1,331 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta property="og:title" content="💎띵반-모음집"/>
+    <meta property="og:description" content="내가 소개하는 내가수 새앨범😍"/>
+    <meta property="og:image" content=""/>
+    <title>게시글 작성</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900" rel="stylesheet">
+
+
+
+    <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+        @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        li{
+            list-style: none;
+        }
+        .mytitle {
+
+            width: 100%;
+            height: 400px;
+
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0.0)), url('https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80');
+            background-position: center 5%;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tit {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #121212;
+        }
+
+        .mymusic {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 20px 0px #ececec;
+            border-radius: 20px;
+        }
+
+
+        #album-art {
+            width: 150px;
+            height: 150px;
+            margin-left: 30px;
+            float: left;
+        }
+
+        #description {
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-floating > button {
+            float: right;
+        }
+
+        .mypost {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 20px 0px #ececec;
+            border-radius: 20px;
+        }
+
+        #title {
+            width: 100%;
+            margin: 20px auto 0 auto;
+            padding: 20px;
+            background-color: #f3f3f3;
+            border-radius: 30px 30px 0 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        #content {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            margin: 0 auto 20px auto;
+            padding: 20px;
+            border: solid 2px #f3f3f3;
+            border-radius: 0 0 30px 30px;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        #star {
+            max-width: 700px;
+            max-height: 100px;
+            margin: 10px auto 15px auto;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        #starselect {
+            height: 60px;
+        }
+
+        .form-floating{
+            margin-bottom: 10px;
+        }
+
+        .album-tit {
+            font-weight: 700;
+            font-size: 1.6rem;
+            line-height: 1.8;
+            width: 400px;
+            margin-top: 20px;
+            margin-left: 10px;
+            color: #333333;
+        }
+
+        .album-artist {
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 400px;
+            margin-left: 10px;
+            color: #777777;
+        }
+
+        .mypost > button {
+            width: 200px;
+            height: 50px;
+
+            background-color: transparent;
+            color: black;
+
+            border-radius: 50px;
+            border: 1px solid black;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 20px auto 80px auto;
+            display: block;
+        }
+
+        .mypost > button:hover {
+            border: 2px solid black;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .myfooter {
+            height: 40px;
+            background-color: #333333;
+            color: #ececec;
+            margin-top: 120px;
+            line-height: 2.3;
+            text-align: center;
+        }
+
+        .header {
+            width: 100%;
+            height: 80px;
+            position: fixed;
+            top: 0;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            line-height: 1.8;
+
+        }
+
+        .head-l {
+            width: 80%;
+            padding-left: 10%;
+
+        }
+
+        }
+        .head-r {
+            width: 20%;
+            align-items: right;
+            padding-right: 10%;
+        }
+
+        .mybtn {
+            width: 65px;
+            margin: 10px 10px 5px 5px;
+            font-size: 2rem;
+
+        }
+
+    </style>
+
+    <script>
+          function get_url() {
+            var album = document.getElementById('album_url').value
+              $('#show-box').empty()
+            $.ajax({
+                type: "POST",
+                url: "/album",
+                data: {album_give: album},
+                success: function (response) {
+                    let item = response['item']
+                    let title = item['title']
+                    let artist = item['artist']
+                    let img = item['img']
+                    let temp_html = `<div id="album-art"><img src="http://image.genie.co.kr${img}" alt="${title}"></div>
+                                        <div id="description">
+                                            <ul>
+                                                <li class="album-tit">${title}</li>
+                                                <li class="album-artist">${artist}</li>
+                                            </ul>
+                                        </div>`
+                    $('#show-box').append(temp_html)
+
+                }
+            });
+        }
+
+        function uploadPost() {
+            var album = document.getElementById('album_url').value
+            let title = $("#title").val();
+            let content = $("#content").val();
+            let star = $("#star").val();
+            $.ajax({
+                type: "POST",
+                url: "/content",
+                data: {title_give: title, content_give: content, star_give: star, album_give: album},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+
+    </script>
+
 </head>
 <body>
+<div class="mytitle">
+    <h1 class="tit">게시글 작성</h1>
+</div>
+
+<div class="mymusic">
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="album_url" placeholder="name@example.com">
+        <label for="floatingInput">앨범(곡) URL</label>
+        <button type="button" class="btn btn-outline-dark" onclick="get_url()">곡 정보 가져오기</button>
+
+    </div>
+
+    <div class="wrap" id="show-box">
+        <div id="album-art"></div>
+        <div id="description">
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="mypost">
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="title" placeholder="name@example.com">
+        <label for="floatingInput">글 제목</label>
+    </div>
+    <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="content"
+                      style="height: 400px"></textarea>
+        <label for="floatingTextarea2">내용</label>
+    </div>
+
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01" id="starselect">별점</label>
+        <select class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+
+    <button onclick="uploadPost()">게시물 등록하기</button>
+</div>
+
+<div class="myfooter">
+        Copyright 2022. hang-hae99 9th W1 team C7. all rights reserved.
+    </div>
+
+<div class="header" id="head1">
+    <div class="head-l"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/'"><i class="bi bi-house-heart myico"></i></button></div>
+    <div class="head-r"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/signup'"><i class="bi bi-person-plus-fill myico"></i></button><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/signin'"><i class="bi bi-person-heart myico"></i></button></div>
+</div>
+<div class="header" id="head2">
+    <div class="head-l"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/'"><i class="bi bi-house-heart myico"></i></button></div>
+    <div class="head-r"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/write'"><i class="bi bi-pencil-square myico"></i></button><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/signin'"><i class="bi bi-person-x-fill myico"></i></button></div>
+</div>
+</div>
 
 </body>
 </html>
