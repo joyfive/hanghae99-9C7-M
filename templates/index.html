@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-    <meta property="og:title" content="내가 직접 소개하는 BEST 앨범"/>
-    <meta property="og:description" content="울오빠울언니울애기 총출동! 좋아하는 가수 앨범을 홍보해보세요"/>
+    <meta property="og:title" content="💎띵반-모음집"/>
+    <meta property="og:description" content="내가 소개하는 내가수 새앨범😍"/>
     <meta property="og:image" content=""/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,45 +18,303 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>내가 직접 소개하는 BEST 앨범</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
-
-    <script>
-         function get_url() {
-            var album = document.getElementById('album_url').value
-            $.ajax({
-                type: "POST",
-                url: "/album",
-                data: {album_give: album},
-                success: function (response) {
-                    let item = response['item']
-                    console.log(item)
-                    let title = item['title']
-                    let artist = item['artist']
-                    let img = item['img']
-                    console.log(title,artist,img)
-                    let temp_html = `<div class="album-box">
-                                     <p>${artist}</p>
-                                     <p>${title}</p>
-                                     <img src="http://image.genie.co.kr${img}" alt="${title}">
-                                     </div>`
-                    $('#show-box').append(temp_html)
-
-                }
-            });
-        }
-
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>띵반-모음집</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900" rel="stylesheet">
 
     <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+        @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
         * {
             font-family: 'Noto Sans KR', sans-serif;
         }
+
+        .main-wrap  {
+            width: 100%;
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0.0)), url("https://images.unsplash.com/photo-1600172454520-134a542a2255?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80;");
+            background-position: center 20%;
+            background-size: cover;
+            display: flex;
+        }
+
+        .header {
+            width: 100%;
+            height: 80px;
+            position: fixed;
+            top: 0;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            line-height: 1.8;
+
+        }
+
+        .head-l {
+            width: 80%;
+            padding-left: 10%;
+
+        }
+        }
+        .head-r {
+            width: 20%;
+            align-items: right;
+            padding-right: 10%;
+        }
+
+        .mybtn {
+            width: 65px;
+            margin: 10px 10px 5px 5px;
+            font-size: 2rem;
+
+        }
+        .main {
+            margin: 12% auto 7% auto;
+            max-width: 70%;
+            height: 60%;
+            display: block;
+
+        }
+
+        .tit-text {
+            font-weight: 900;
+            font-size: 4.5rem;
+            line-height: 1.3;
+            text-align: center;
+
+        }
+        .tit-sub {
+            margin: 5% auto 5% auto;
+            width: 45%;
+            /*background-color: green;*/
+            font-weight: 500;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        .tit-btn {
+            padding: 1%;
+            margin: 10px;
+            border-radius: 50px;
+            border: 2px solid black;
+            background-color: white;
+            width: 120px;
+            font-weight: 700;
+        }
+        .tit-btn:hover {
+            padding: 1%;
+            margin: 10px;
+            border-radius: 50px;
+            border: 2px solid black;
+            background-color: black;
+            color: white;
+            width: 120px;
+            font-weight: 700;
+        }
+        .cont-body {
+            /*position: relative;*/
+            width: 100%;
+            display: flex;
+
+        }
+        .content-box {
+            top: 30%;
+            left: 10%;
+            right: 10%;
+            width: 75%;
+            margin: 0px auto 20px auto;
+            background-color: #efefef;
+            border-radius: 20px;
+            padding: 20px;
+            display: inline-flex;
+        }
+
+        .mycard {
+            position: center;
+            max-width: 400px;
+            max-height: 600px;
+            border-radius: 20px;
+            margin: 20px;
+
+        }
+        .card-img{
+            width: 100%;
+            height: 100%;
+        }
+        .card-img:hover{
+            filter:blur(3px);
+        }
+
+        .card-star {
+            font-size: 2rem;
+        }
+        .card-tit {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+        .card-footer {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .card-footer-l {
+            text-align: left;
+            width: 85%
+        }
+        .card-footer-r {
+            text-align: right;
+            width: 25%
+        }
+
+       .myfooter {
+            height: 40px;
+            background-color: #333333;
+            color: #ececec;
+            margin-top: 120px;
+            line-height: 2.3;
+            text-align: center;
+        }
     </style>
+    <script>
+        let num = '{{ num }}'
+        $(document).ready(function () {
+            listing();
+        });
+        function listing() {
+            $("#mypost").empty()
+            $.ajax({
+                type: 'GET',
+                url: '/list',
+                data: {},
+                success: function (response) {
+                    $("#mylist").empty()
+                    cont = response["content_list"]
+                    for (let i = 0; i < cont.length; i++){
+                        let title = cont[i]["title"]
+                        let star = cont[i]["star"]
+                        let img = cont[i]["img"]
+                        let s_title = cont[i]["s_title"]
+                        let star_image = '⭐'.repeat(star)
+                        let num = cont[i]["num"]
+                        let artist = cont[i]["artist"]
+                        let temp_html = `<div class="col">
+                                            <div class="card h-40 mycard">
+                                                <img src="https://image.genie.co.kr${img}"
+                                                     class="card-img-top card-img" alt="${s_title}" onClick="location.href='/view/${num}'">
+                                                <div class="card-body">
+                                                    <h5 class="card-title card-star">${star_image}</h5>
+                                                    <p class="card-title card-tit">${title}</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                <small class="text-muted"><p>💎 ${artist}</p><p>💿 ${s_title}</p></small>
+                                                </div>
+                                            </div>
+                                        </div>`
+                        $("#mylist").append(temp_html)
+
+                    }
+                }
+            })
+        }
+    </script>
 </head>
 <body>
-<input type="text" value="" id="album_url"><input type="button" onclick="get_url()" value="보내기!">
-<div id="show-box">
+
+
+    <div class="main-wrap">
+        <div class="main">
+            <h1 class="tit-text">
+                내-가수🧝🏻‍♀️🧝🏻‍♂. 내-앨범💿<br>
+                덕심 가득 담아 소개해주세요.<br>
+                나만 듣기 아까운 💎띵반-모음집.
+            </h1>
+            <p class="tit-sub" id="sign-bf"><button type="button" onclick="window.location.href='/signin'" class="tit-btn">로그인</button> 하고 앨범 리뷰 작성하러가기 👉</p>
+        </div>
+    </div>
+
+
+
 </div>
+
+    <div class="cont-body">
+        <div class="content-box">
+            <div class="row row-cols-1 row-cols-md-4 g-4 card-wrap" id="mylist"">
+                <div class="col">
+                    <div class="card h-40 mycard">
+                        <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/842/800/82842800_1659340238924_1_600x600.JPG/dims/resize/Q_80,0"
+                             class="card-img-top card-img" alt="..." onclike="go_view()">
+                        <div class="card-body">
+                            <h5 class="card-title card-star">⭐⭐⭐⭐⭐</h5>
+                            <p class="card-title card-tit">NewJeans 1st EP 'New Jeans'</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-footer-l">뉴진스 짱짱맨</p>
+                            <p class="card-footer-r">1 ❤️</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-40 mycard">
+                        <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/842/800/82842800_1659340238924_1_600x600.JPG/dims/resize/Q_80,0"
+                             class="card-img-top card-img" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title card-star">⭐⭐⭐⭐⭐</h5>
+                            <p class="card-title card-tit">NewJeans 1st EP 'New Jeans'</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-footer-l">뉴진스 짱짱맨</p>
+                            <p class="card-footer-r">1 ❤️</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-40 mycard">
+                        <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/842/800/82842800_1659340238924_1_600x600.JPG/dims/resize/Q_80,0"
+                             class="card-img-top card-img" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title card-star">⭐⭐⭐⭐⭐</h5>
+                            <p class="card-title card-tit">NewJeans 1st EP 'New Jeans'</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-footer-l">뉴진스 짱짱맨</p>
+                            <p class="card-footer-r">1 ❤️</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-40 mycard">
+                        <img src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/842/800/82842800_1659340238924_1_600x600.JPG/dims/resize/Q_80,0"
+                             class="card-img-top card-img" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title card-star">⭐⭐⭐⭐⭐</h5>
+                            <p class="card-title card-tit">NewJeans 1st EP 'New Jeans'</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-footer-l">뉴진스 짱짱맨</p>
+                            <p class="card-footer-r">1 ❤️</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="myfooter">
+        Copyright 2022. hang-hae99 9th W1 team C7. all rights reserved.
+    </div>
+
+<div class="header" id="head1">
+    <div class="head-l"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/'"><i class="bi bi-house-heart myico"></i></button></div>
+    <div class="head-r"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/signup'"><i class="bi bi-person-plus-fill myico"></i></button><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/signin'"><i class="bi bi-person-heart myico"></i></button></div>
+</div>
+<div class="header" id="head2">
+    <div class="head-l"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/'"><i class="bi bi-house-heart myico"></i></button></div>
+    <div class="head-r"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/write'"><i class="bi bi-pencil-square myico"></i></button><button type="button" class="btn btn-outline-light mybtn" onclick="function sign_out()"><i class="bi bi-person-x-fill myico"></i></button></div>
+</div>
+</div>
+
 </body>
 </html>
