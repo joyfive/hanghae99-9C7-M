@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import requests
-
+from secretkey import secret_key
 app = Flask(__name__)
 
 from pymongo import MongoClient
 import certifi
 
 ca = certifi.where()
-
-client = MongoClient('mongodb+srv://DaminAn:ekals3939@cluster0.hd1bg.mongodb.net/Cluster0?retryWrites=true&w=majority',
-                     tlsCAFile=ca)
+SECRET_KEY = secret_key
+client = MongoClient(SECRET_KEY, tlsCAFile=ca)
 db = client.dbsparta
 
 
