@@ -2,7 +2,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 상세보기</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <meta property="og:title" content="💎띵반-모음집"/>
+    <meta property="og:description" content="내가 소개하는 내가수 새앨범😍"/>
+    <meta property="og:image" content=""/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -10,19 +17,27 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>띵반-모음집</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900" rel="stylesheet">
+
     <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+        @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
         li{
             list-style: none;
         }
         .mytitle {
             width: 100%;
-            height: 250px;
+            height: 400px;
 
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2015/01/20/13/13/samsung-605439_960_720.jpg');
-            background-position: center;
+
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0.0)), url('https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80');
+            background-position: center 5%;
             background-size: cover;
-
-            color: white;
 
             display: flex;
             flex-direction: column;
@@ -30,36 +45,24 @@
             justify-content: center;
         }
 
-        .mymusic {
-            background-color: green;
-            width: 95%;
-            max-width: 800px;
-            margin: 20px auto 0px auto;
-            padding: 20px;
-            box-shadow: 0px 0px 3px 0px gray;
-            flex-direction: row;
+        .tit {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #121212;
         }
 
-
         #album-art {
-            background-color: orange;
-            width: 300px;
-            height: 300px;
+            width: 150px;
+            height: 150px;
             margin-left: 30px;
             float: left;
         }
 
         #description {
-            background-color: skyblue;
-            width: 300px;
-            height: 300px;
+            width: 150px;
+            height: 150px;
             display: inline-block;
             margin-left: 10px;
-        }
-
-        .wrap {
-            display: flex;
-            justify-content: center;
         }
 
         .mypost {
@@ -67,11 +70,37 @@
             max-width: 800px;
             margin: 20px auto 0px auto;
             padding: 20px;
-            box-shadow: 0px 0px 3px 0px gray;
+            box-shadow: 0px 0px 20px 0px #ececec;
+            border-radius: 20px;
+        }
+
+        .myalbum {
+            width: 90%;
+            margin: 20px auto 10px auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 20px;
         }
 
 
-        .mypost > button {
+        .album-tit {
+            font-weight: 700;
+            font-size: 1.6rem;
+            line-height: 1.8;
+            width: 400px;
+            margin-top: 20px;
+            margin-left: 10px;
+            color: #333333;
+        }
+        .album-artist {
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 400px;
+            margin-left: 10px;
+            color: #777777;
+        }
+
+        .dmbutton {
             width: 200px;
             height: 50px;
 
@@ -80,45 +109,101 @@
 
             border-radius: 50px;
             border: 1px solid black;
-
-            margin: 10px auto 0 auto;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 20px auto 80px auto;
             display: block;
         }
 
-        .mypost > button:hover {
+        .dmbutton:hover {
             border: 2px solid black;
         }
 
         #title {
-            background-color: gray;
-            max-width: 700px;
-            max-height: 100px;
-            margin: 10px auto 15px auto;
+            width: 90%;
+            margin: 20px auto 0 auto;
+            padding: 20px;
+            background-color: #f3f3f3;
+            border-radius: 30px 30px 0 0;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
 
         #content {
-            background-color: silver;
-            max-width: 700px;
-            height: 400px;
-            margin: auto;
+            width: 90%;
+            height: 100%;
+            min-height: 300px;
+            margin: 0 auto 20px auto;
+            padding: 20px;
+            border: solid 2px #f3f3f3;
+            border-radius: 0 0 30px 30px;
+            font-size: 1rem;
+            font-weight: 400;
         }
 
+        .star-txt {
+            font-size: 1.2rem;
+            line-height: 2.0;
+        }
         .wrapper {
             display: flex;
             justify-content: center;
+
         }
 
         #star {
-            background-color: gray;
             max-width: 700px;
             max-height: 100px;
             margin: 10px auto 15px auto;
+            font-size: 3rem;
+            font-weight: 700;
         }
 
         #like {
             margin-right: 30px;
         }
 
+        img {
+            width: 150px;
+            height: 150px;
+        }
+        .myfooter {
+            height: 40px;
+            background-color: #333333;
+            color: #ececec;
+            margin-top: 120px;
+            line-height: 2.3;
+            text-align: center;
+        }
+        .header {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            top: 0;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            line-height: 2.2;
+
+        }
+
+        .head-l {
+            width: 80%;
+            padding-left: 10%;
+
+        }
+        }
+        .head-r {
+            width: 20%;
+            align-items: right;
+            padding-right: 10%;
+        }
+
+        .mybtn {
+            margin-top: 20px;
+        }
     </style>
 
     <script>
@@ -130,23 +215,35 @@
             $("#mypost").empty()
             $.ajax({
                 type: 'GET',
-                url: '/view/${num}',
-                data: {},
+                url: '/view_content',
+                data: {num},
                 success: function (response) {
-                    rows = response["content"]
+                    rows = response["content_list"]
                     for (let i = 0; i < rows.length; i++){
-                        let cont = rows[i]["content"]
+                        let artist = rows[i]["artist"]
+                        let img = rows[i]["img"]
+                        let s_title = rows[i]["s_title"]
+                        let content = rows[i]["content"]
                         let title = rows[i]["title"]
                         let star = rows[i]["star"]
 
                         let star_image = '⭐'.repeat(star)
 
-                        let temp_html = `    <div id="title">${title}</div>
+                        let temp_html = `<div class="myalbum">
+                                            <div id="album-art"><img src="http://image.genie.co.kr${img}" alt="${title}" ></div>
+                                                <div id="description">
+                                                    <ul>
 
-                                            <div id="content">${cont}</div>
+                                                        <li class="album-tit">${s_title}</li>
+                                                        <li class="album-artist"> ${artist}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                           <div id="title" class="card-tit">${title}</div>
+                                            <div id="content" class="card-cont">${content}</div>
                                             <div class="wrapper">
-                                                <div id="star">
-                                                    별점 : ${star_image}
+                                                <div id="star" class="card-star">
+                                                    😗💬👉 ${star_image}
                                                 </div>`
                         $("#mypost").append(temp_html)
 
@@ -159,23 +256,8 @@
 </head>
 <body>
 <div class="mytitle">
-    <h1>게시글</h1>
+    <h1 class="tit">게시글</h1>
 </div>
-
-<div class="mymusic">
-    <div class="wrap">
-   <div id="album-art">앨범아트</div>
-    <div id="description">
-        <ul>
-            <li>앨범명(곡명)</li>
-            <li>가수</li>
-            <li>(앨범명)</li>
-        </ul>
-    </div>
-</div>
-
-</div>
-
 
 <div class="mypost" id="mypost">
     <div id="title">
@@ -193,17 +275,18 @@
         <div id="star">
             별점 : ⭐⭐⭐
         </div>
-
-        <div id="like">
-            3❤️
-        </div>
     </div>
-
-
-
-    <button onclick=location.href='./'>홈으로</button>
-
 </div>
 
+
+    <button onclick=location.href='../' class="dmbutton">홈으로</button>
+    <div class="myfooter">
+        Copyright 2022. hang-hae99 9th W1 team C7. all rights reserved.
+    </div>
+
+<div class="header" id="head2">
+    <div class="head-l"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/'"><i class="bi bi-house-heart"></i></button></div>
+    <div class="head-r"><button type="button" class="btn btn-outline-light mybtn" onclick="window.location.href='/write'">내가수 새앨범 소개 😍</button></div>
+</div>
 </body>
 </html>

@@ -1,23 +1,32 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from bs4 import BeautifulSoup
 import requests
 
+from secretkey import secret_key
 app = Flask(__name__)
 
 from pymongo import MongoClient
 import certifi
 
 ca = certifi.where()
-
 client = MongoClient('mongodb+srv://DaminAn:ekals3939@cluster0.hd1bg.mongodb.net/Cluster0?retryWrites=true&w=majority',
                      tlsCAFile=ca)
+SECRET_KEY = secret_key
+client = MongoClient(SECRET_KEY, tlsCAFile=ca)
 db = client.dbsparta
 
+@app.route('/favicon.ico')
+def favicon():
+	return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
 def main():
     return render_template('index.html')
 
+@app.route('/list', methods=['GET'])
+def view_list():
+    content_list = list(db.musics.find({}, {'_id': False}))
+    return jsonify({'content_list': content_list})
 
 @app.route('/signin')
 def signin():
