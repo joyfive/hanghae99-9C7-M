@@ -39,6 +39,12 @@ HTML / CSS / JavaScript / Python / Flask
 <br>
 
 ## 배운 점 & 아쉬운 점
+배운 점 <br>
+- post한 곳이 아닌 다른 페이지에서 get해올 수 있게 하는 게시판 방법 터득
+- 크롤링 자료와 작성 자료 동시 데이터 저장 방법 터득
+- github conflict 해결
+
+아쉬운 점 <br>
 - 좋아요 기능 구현
 - 게시물 삭제 및 수정
 
