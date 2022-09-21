@@ -3,17 +3,23 @@
 
 목차
 
+## 팀원 및 역할
+
+오기쁨(팀장) : 메인페이지 및 디자인 전반
+유도현 : 회원가입 및 로그인
+안다민 : 게시판 상세보기 및 작성
+
 ## 프로젝트 소개
 
 <p align="justify">
-프로젝트 개요/동기
+음반을 쿼리를 통해 유저가 직접 찾고 의견도 쓸 수 있는 게시글 형태의 홈페이지
 </p>
 
 <br>
 
 ## 기술 스택
 
-| HTML | CSS |  JavaScript   |  Python   |  Flask   |
+HTML / CSS / JavaScript / Python / Flask
 
 <br>
 
