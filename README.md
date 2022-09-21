@@ -18,8 +18,6 @@ GIF Images
 ## 기술 스택
 
 | HTML | CSS |  JavaScript   |  Python   |  Flask   |
-| :--------: | :--------: | :------: | :-----: |:-----: |
-|<img src="html.png">|<img src="CSS.png">| <img src="javascript.svg"> | <img src="python.png"> |<img src="flask.png"> |
 
 <br>
 
