@@ -101,7 +101,6 @@ HTML / CSS / JavaScript / Python / Flask / mongoDB
 -로그인 회원가입 토글 사용법
 -프로필 변경과 회원탈퇴
 
-
 (다민)
 배운 점 <br>
 - post한 곳이 아닌 다른 페이지에서 get해올 수 있게 하는 게시판 방법 터득
