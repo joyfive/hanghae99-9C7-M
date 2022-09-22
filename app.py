@@ -26,9 +26,6 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("main", msg="로그인 정보가 존재하지 않습니다.")) #로그인이 안된상태랑 메세지
 
-@app.route('/main')
-def main():
-    return render_template('main.html')
 
 @app.route('/sign')
 def sign():
