@@ -124,9 +124,6 @@
             font-weight: 400;
         }
 
-        #starselect {
-            height: 60px;
-        }
 
         .form-floating{
             margin-bottom: 10px;
@@ -217,6 +214,56 @@
 
         }
 
+        .myinput {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .myinput-box {
+            width: 72%;
+            margin-right: 2%;
+        }
+        .myoutput-box {
+            width: 24%;
+        }
+        .user-guide {
+            width: 95%;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .myimg {
+            width : 100%;
+            height: 100%;
+            max-width : 800px;
+            max-height: 450px;
+        }
+        .genie {
+            width: 100%;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 10px auto 0 auto;
+            border-radius: 10px;
+        }
+
+        .star-box {
+            border-radius: 10px;
+            background-color: #ececec;
+            width: 22%;
+            margin-right: 10px;
+            height: 40px;
+            margin-top: 9px;
+            text-align: center;
+            padding-top: 3px;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        .star-select {
+            height: 40px;
+            width: 75%;
+
+
+        }
     </style>
 
     <script>
@@ -256,7 +303,7 @@
                 data: {title_give: title, content_give: content, star_give: star, album_give: album},
                 success: function (response) {
                     alert(response['msg']);
-                    window.location.reload();
+                    window.location.href='../';
                 }
             });
         }
@@ -268,13 +315,17 @@
 <div class="mytitle">
     <h1 class="tit">게시글 작성</h1>
 </div>
-
-<div class="mymusic">
-    <div class="form-floating mb-3">
+<div class="user-guide">
+    <div><img src="/static/guide.jpg" class="myimg"></div>
+    <button type="button" class="btn btn-outline-dark genie" onclick="window.open('https://www.genie.co.kr/detail/albumInfo?axnm=81867444','_blank')">앨범 찾으러 이동 👉</button>
+</div>
+    <div class="mymusic">
+    <div class="form-floating mb-3 myinput">
         <input type="email" class="form-control" id="album_url" placeholder="name@example.com">
-        <label for="floatingInput">앨범(곡) URL</label>
-        <button type="button" class="btn btn-outline-dark" onclick="get_url()">곡 정보 가져오기</button>
+        <label for="floatingInput" class="myinput-box">지니뮤직 앨범 정보 페이지의 파라미터(axnm="여기")값만 넣어주세요</label>
+        <button type="button" class="btn btn-outline-dark myoutput-box" onclick="get_url()">곡 정보 가져오기</button>
 
+<!--        onclick="get_url()"-->
     </div>
 
     <div class="wrap" id="show-box">
@@ -299,9 +350,9 @@
     </div>
 
     <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01" id="starselect">별점</label>
+        <div class="star-box" id="starselect">😗💬</div>
         <select class="form-select" id="star">
-            <option selected>-- 선택하기 --</option>
+            <option selected class="star-select">-- 선택하기 --</option>
             <option value="1">⭐</option>
             <option value="2">⭐⭐</option>
             <option value="3">⭐⭐⭐</option>
