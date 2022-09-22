@@ -22,11 +22,11 @@ db = client.dbsparta
 
 @app.route('/favicon.ico')
 def favicon():
-	return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
+   return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 #메인, 리스팅
 @app.route('/')
-def main():
+def index():
     return render_template('index.html')
 
 @app.route('/list', methods=['GET'])
@@ -36,11 +36,22 @@ def view_list():
 
 #로그인, 회원가입
 
+@app.route('/home')
+def home():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+        return render_template('index.html', user_info=user_info)  #로그인하면 넘어갈 페이지
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("index", msg="로그인 시간이 만료되었습니다.")) #로그인 시간 끝나면 나오는 페이지랑 메세지
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("index", msg="로그인 정보가 존재하지 않습니다."))
 
-@app.route('/sign')
-def sign():
+@app.route('/signin')
+def signin():
     msg = request.args.get("msg")
-    return render_template('sign.html', msg=msg)
+    return render_template('signin.html', msg=msg)
 
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
@@ -56,7 +67,7 @@ def sign_in():
             'id': username_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8') #(localhost 하면 주석)(flask하면 주석 지우기)
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256') #(localhost 하면 주석)(flask하면 주석 지우기)
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
@@ -115,7 +126,15 @@ def album_input():
 #게시판(게시글작성-크롤링 데이터 통합 저장, 게시글 뷰- 매개변수 상세 Url)
 @app.route('/view/<num>')
 def view(num):
-    return render_template('view.html', num=num)
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({'username': payload['id']})
+        return render_template('view.html', num=num, user_info=user_info)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("index", msg="로그인 시간이 만료되었습니다."))  # 로그인 시간 끝나면 나오는 페이지랑 메세지
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("signin", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/view_content/', methods=['GET'])
 def view_content():
@@ -127,7 +146,15 @@ def view_content():
 
 @app.route('/write')
 def write():
-    return render_template('write.html')
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({'username': payload['id']})
+        return render_template('write.html', user_info=user_info)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("index", msg="로그인 시간이 만료되었습니다."))  # 로그인 시간 끝나면 나오는 페이지랑 메세지
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("signin", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route("/content", methods=["POST"])
 def content():
@@ -170,4 +197,3 @@ def content():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5001, debug=True)
-
