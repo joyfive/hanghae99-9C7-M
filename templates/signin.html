@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900" rel="stylesheet">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -23,7 +24,7 @@
     <script src="{{ url_for('static', filename='sign.js') }}"></script>  {#static 안에 있는 script 적용#}
 
 
-     <style>
+    <style>
         @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 
         body {
@@ -103,12 +104,12 @@
 <body>
 <section class="section">
     <div class="container">
-        <div class="box" style="max-width: 480px;margin:auto">
+        <div class="box">
             <div id="signintitle" class="signtitle">
-                <h1>로그인</h1>
+                <h1 class="tit">로그인</h1>
             </div>
             <div id="signuptitle" class="signtitle is-hidden">
-                <h1>회원가입</h1>
+                <h1 class="tit">회원가입</h1>
             </div>
 
             <article class="media">
@@ -149,8 +150,8 @@
                         </nav>
                         <nav class="level is-mobile">
                             <!--       버튼 텍스트 바꿔야함     온클릭 메인페이지로 변경-->
-                            <button class="level-item button is-back" onclick="location.href='/home'">
-                                메인페이지로 넘어감
+                            <button class="level-item button is-back" onclick="location.href='/'">
+                                돌아가기
                             </button>
                         </nav>
                         <hr>
@@ -196,7 +197,11 @@
     </div>
 
     </div>
-</section>
 
+
+</section>
+    <div class="myfooter">
+        Copyright 2022. hang-hae99 9th W1 team C7. all rights reserved.
+    </div>
 </body>
 </html>
