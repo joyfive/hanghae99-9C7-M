@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, request, redirect, url_for send_from_directory
+from flask import Flask, render_template, request, jsonify, request, redirect, url_for, send_from_directory
 from bs4 import BeautifulSoup
 import requests
 import os
