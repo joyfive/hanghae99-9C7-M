@@ -23,25 +23,28 @@
     <script src="{{ url_for('static', filename='sign.js') }}"></script>  {#static 안에 있는 script 적용#}
 
 
-    <style>
+     <style>
+        @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 
         body {
-            background-color: wheat;
+            background-color: #ececec;
             min-height: 100vh;
+
         }
 
         .section {
-
+            position: relative;
         }
 
         .box {
             max-width: 480px;
             border-radius: 20px;
-            margin: auto
+            margin: 80px auto 80px auto;
         }
 
         .signtitle {
             font-size: 30px;
+            font-weight: 700;
             margin: auto auto 20px auto;
             display: flex;
             align-items: center;
@@ -60,7 +63,7 @@
 
         .button.is-sparta {
             background-color: saddlebrown;
-            background: linear-gradient(to left, rgb(0, 140, 78), rgb(000, 255, 000));
+            background: linear-gradient(to left, #333333, #454545);
             border-color: transparent;
             color: #fff !important;
         }
@@ -77,6 +80,22 @@
         }
 
         .control input { /*인풋박스*/
+        }
+        .myfooter {
+            width: 100%;
+            height: 40px;
+            background-color: #333333;
+            color: #ececec;
+            line-height: 2.3;
+            text-align: center;
+            display: fixed;
+            bottom: 0;
+            position: absolute;
+        }
+        .tit {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-top: 20px;
         }
     </style>
 
