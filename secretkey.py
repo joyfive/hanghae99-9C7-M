@@ -1,0 +1,1 @@
+secret_key = 'mongodb+srv://DaminAn:ekals3939@cluster0.hd1bg.mongodb.net/Cluster0?retryWrites=true&w=majority'
