@@ -48,7 +48,7 @@ HTML / CSS / JavaScript / Python / Flask / mongoDB
 - JS) 가공데이터로 temp_html 사용자 노출
 
 #### 2) write.html 
-- jinja 일부 활용한 게시판 기능 구현 
+- Jinja2 템플릿 엔진을 이용한 서버사이드 렌더링으로 게시판 기능 구현 
 - 사용자가 지니뮤직의 파라미터값 입력 시 크롤링 모듈 동작
 - 가공데이터로 전달받은 response 값은 사용자 노출 및 게시글 데이터 저장 시 같이 저장 
 - 글제목+내용+별점 입력 후 함께 mongoDB에 데이터 저장 
@@ -63,12 +63,12 @@ HTML / CSS / JavaScript / Python / Flask / mongoDB
 <br>
 
 ## 배운 점 & 아쉬운 점
-배운 점 <br>
 (기쁨)
 
 (도원)
 
 (다민)
+배운 점 <br>
 - post한 곳이 아닌 다른 페이지에서 get해올 수 있게 하는 게시판 방법 터득
 - 크롤링 자료와 작성 자료 동시 데이터 저장 방법 터득
 - 데이터 정렬 역순화
