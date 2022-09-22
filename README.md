@@ -17,6 +17,8 @@
   <li> 게시글 DB 저장 시 크롤링 데이터와 사용자 입력 데이터를 1개의 아이템으로 [POST]</li>
 </p>
 
+## <a href="https://www.notion.so/joyfive/C-7-SA-d39031182ebb4444aca55339cf89f7f4">SA</a>
+
 <br>
 
 ## 기술 스택
