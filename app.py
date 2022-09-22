@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, request, redirect, url_for send_from_directory
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -8,6 +8,11 @@ app = Flask(__name__)
 
 from pymongo import MongoClient
 import certifi
+import jwt
+import datetime
+import hashlib
+
+from datetime import datetime, timedelta
 
 ca = certifi.where()
 
@@ -19,6 +24,7 @@ db = client.dbsparta
 def favicon():
 	return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+#메인, 리스팅
 @app.route('/')
 def main():
     return render_template('index.html')
@@ -28,16 +34,59 @@ def view_list():
     content_list = list(db.musics.find({}, {'_id': False}).sort("num", -1).limit(100))
     return jsonify({'content_list': content_list})
 
-@app.route('/signin')
-def signin():
-    return render_template('signin.html')
+#로그인, 회원가입
 
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
+@app.route('/sign')
+def sign():
+    msg = request.args.get("msg")
+    return render_template('sign.html', msg=msg)
+
+@app.route('/sign_in', methods=['POST'])
+def sign_in():
+    # 로그인
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+
+    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    result = db.users.find_one({'username': username_receive, 'password': pw_hash})
+
+    if result is not None:
+        payload = {
+            'id': username_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8') #(localhost 하면 주석)(flask하면 주석 지우기)
+
+        return jsonify({'result': 'success', 'token': token})
+    # 찾지 못하면
+    else:
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
+@app.route('/sign_up/save', methods=['POST'])
+def sign_up():
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+    password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+
+    doc = {
+        "username": username_receive,
+        "password": password_hash
+    }
+    db.users.insert_one(doc)
+    return jsonify({'result': 'success'})
+
+
+@app.route('/sign_up/check_dup', methods=['POST'])
+def check_dup():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"username": username_receive}))
+    # print(value_receive, type_receive, exists)
+    return jsonify({'result': 'success', 'exists': exists})
+
+
+# 파라미터값 인풋데이터 크롤링 후 가공된 데이터 반환(write 페이지)
 @app.route("/album", methods=["POST"])
 def album_input():
     album_receive = request.form["album_give"]
@@ -63,7 +112,7 @@ def album_input():
     return jsonify({'item': item})
 
 
-
+#게시판(게시글작성-크롤링 데이터 통합 저장, 게시글 뷰- 매개변수 상세 Url)
 @app.route('/view/<num>')
 def view(num):
     return render_template('view.html', num=num)
