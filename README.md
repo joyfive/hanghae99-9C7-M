@@ -19,7 +19,7 @@
 
 ## 기술 스택
 
-HTML / CSS / JavaScript / Python / Flask
+HTML / CSS / JavaScript / Python / Flask / mongoDB
 
 <br>
 
@@ -32,15 +32,29 @@ HTML / CSS / JavaScript / Python / Flask
 - 
 
 ### 기능 3 : 게시글 입력 및 확인
-- jinja 일부 활용한 게시판 기능 구현 -> 게시물 넘버링 통한 쿼리 접근
+- write.html : jinja 일부 활용한 게시판 기능 구현 -> 지니뮤직 쿼리 일부 숫자부분 접근(크롤링 발생) -> url api에 입력 후 검색 -> 글제목+내용+별점 입력 후 함께 mongoDB에 데이터 저장 
 - 게시판 작성 -> 게시판 작성 확인
+- view.html : write에서 접근했던 데이터 내용 앨범아트, 앨범 및 가수, 글제목, 내용 순으로 정렬 후 나열
 
 
 <br>
 
 ## 배운 점 & 아쉬운 점
+배운 점 <br>
+(기쁨)
+
+(도원)
+
+(다민)
+- post한 곳이 아닌 다른 페이지에서 get해올 수 있게 하는 게시판 방법 터득
+- 크롤링 자료와 작성 자료 동시 데이터 저장 방법 터득
+- 데이터 정렬 역순화
+- github conflict 해결
+
+아쉬운 점 <br>
 - 좋아요 기능 구현
 - 게시물 삭제 및 수정
+
 
 <p align="justify">
 
